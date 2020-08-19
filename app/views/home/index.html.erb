@@ -1,0 +1,28 @@
+<h1>Petes Instagram</h1>
+<p>The better Instagram!</p>
+
+<% if user_signed_in? %>
+  <p>Your email is: <%= current_user.email %></p>
+  <% if current_user.profile %>
+    <p>Hello <%= current_user.profile.first_name %></p>
+    <p><%= link_to 'Create Post', new_post_path, class: 'btn btn-success' %></p>
+
+  <% else %>
+    <%= link_to "Create your profile", new_profile_path, class: "btn btn-primary" %>
+  <% end %>
+
+<% end %>
+
+<div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-sm">
+      <div class="card" >
+        <img src="<%= post.pic %>" class="card-img-top img-fluid" alt="Users profile pic">
+        <div class="card-body">
+          <h5 class="card-title"><%= post.user.profile.first_name %> <%= post.user.profile.last_name %></h5>
+          <p class="card-text"><%= post.caption %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
